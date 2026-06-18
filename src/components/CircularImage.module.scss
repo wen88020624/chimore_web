@@ -1,0 +1,16 @@
+@use 'styles/variables.module.scss' as vars;
+
+.wrapper {
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: vars.$shadow-md;
+  border: 4px solid vars.$white;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

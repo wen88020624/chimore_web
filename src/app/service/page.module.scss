@@ -1,0 +1,127 @@
+@use 'styles/variables.module.scss' as vars;
+
+.iconSection {
+  padding: 64px 24px;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+}
+
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+  }
+}
+
+.iconCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.iconCircle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: vars.$primary-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+
+  img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.alternateSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding: 64px 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+    justify-items: center;
+  }
+}
+
+.imageLeft {
+  .sectionContent {
+    order: 2;
+
+    @media (max-width: 768px) {
+      order: 2;
+    }
+  }
+}
+
+.imageRight {
+  .sectionContent {
+    order: 1;
+  }
+}
+
+.sectionContent {
+  max-width: 480px;
+}
+
+.sectionHeading {
+  color: vars.$primary-color;
+  font-size: 24px;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.serviceList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 14px 0;
+    border-bottom: 1px solid vars.$border-color;
+    color: vars.$text-secondary;
+    font-size: 15px;
+    line-height: 1.6;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.closingSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px 24px 96px;
+  background: vars.$primary-light;
+  text-align: center;
+}
+
+.closingText {
+  text-align: center;
+  max-width: 640px;
+  margin: 0;
+  line-height: 2;
+  color: vars.$text-secondary;
+  font-size: 16px;
+}

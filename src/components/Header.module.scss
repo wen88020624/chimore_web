@@ -1,0 +1,124 @@
+@use 'styles/variables.module.scss' as vars;
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: vars.$white;
+  border-bottom: 1px solid vars.$border-color;
+  transition: box-shadow 0.3s ease;
+}
+
+.siteHeaderTransparent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.headerInner {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: vars.$header-height;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: vars.$text-color;
+  flex-shrink: 0;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+}
+
+.brandIcon {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brandName {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.headerNav {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.navLink {
+  text-decoration: none;
+  color: vars.$text-secondary;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.25s ease;
+  position: relative;
+  padding-bottom: 4px;
+
+  &:hover {
+    color: vars.$primary-color;
+  }
+}
+
+.activeLink {
+  composes: navLink;
+  color: vars.$primary-color;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: vars.$primary-color;
+    border-radius: 1px;
+  }
+}
+
+@media (max-width: 900px) {
+  .brandName {
+    display: none;
+  }
+
+  .headerNav {
+    gap: 16px;
+  }
+
+  .navLink,
+  .activeLink {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerNav {
+    gap: 10px;
+  }
+
+  .navLink,
+  .activeLink {
+    font-size: 13px;
+  }
+}

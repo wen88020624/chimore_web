@@ -1,0 +1,49 @@
+@use 'styles/variables.module.scss' as vars;
+
+.contactSection {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.contactSection h2 {
+  color: vars.$primary-color;
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+  background: vars.$white;
+  padding: 40px;
+  border-radius: vars.$border-radius-lg;
+  box-shadow: vars.$shadow-sm;
+}
+
+.successMessage {
+  color: #2e7d32;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.submitBtn {
+  background: vars.$primary-color !important;
+  margin-top: 8px;
+
+  &:hover {
+    background: vars.$primary-dark !important;
+  }
+}

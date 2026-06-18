@@ -1,0 +1,44 @@
+@use 'styles/variables.module.scss' as vars;
+
+.listSection {
+  padding: 48px 24px 96px;
+  background: vars.$white;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px 64px;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.categoryColumn {
+  padding: 0 8px;
+}
+
+.categoryTitle {
+  color: vars.$text-color;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid vars.$primary-color;
+}
+
+.projectList {
+  padding-left: 20px;
+  margin: 0;
+
+  li {
+    padding: 10px 0;
+    color: vars.$text-secondary;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+}

@@ -1,0 +1,22 @@
+@use 'styles/variables.module.scss' as vars;
+
+.socialSection {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.socialTitle {
+  color: vars.$text-color !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.formSection {
+  background: vars.$primary-light;
+  padding: 0 0 48px;
+}

@@ -1,0 +1,17 @@
+@use 'styles/variables.module.scss' as vars;
+
+.mapWrap {
+  width: 100%;
+  min-height: 280px;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+  border: 1px solid vars.$border-color;
+  box-shadow: vars.$shadow-sm;
+}
+
+.map {
+  width: 100%;
+  height: 280px;
+  border: 0;
+  display: block;
+}

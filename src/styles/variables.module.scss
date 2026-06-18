@@ -1,0 +1,23 @@
+$primary-color: #008b8b;
+$primary-dark: #006d6d;
+$primary-light: #e6f4f4;
+$text-color: #2c2c2c;
+$text-secondary: #555;
+$text-muted: #777;
+$text-light: #999;
+$border-color: #e8e8e8;
+$footer-bg: #2a2a2a;
+$dark-brown: #3d3128;
+$white: #fff;
+$max-width: 1200px;
+$header-height: 72px;
+$border-radius: 8px;
+$border-radius-lg: 16px;
+$shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+:export {
+  primaryColor: $primary-color;
+  textColor: $text-color;
+  maxWidth: $max-width;
+}

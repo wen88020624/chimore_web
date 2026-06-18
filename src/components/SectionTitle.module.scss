@@ -1,0 +1,12 @@
+@use 'styles/variables.module.scss' as vars;
+
+.sectionTitle {
+  display: block;
+  width: 100%;
+  text-align: center !important;
+  color: vars.$primary-color !important;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+}

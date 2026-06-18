@@ -1,0 +1,212 @@
+@use 'styles/variables.module.scss' as vars;
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(0, 0, 0, 0.18) 55%,
+    rgba(0, 0, 0, 0.32) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 120px 24px 80px;
+  max-width: 640px;
+}
+
+.heroPanel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  padding: 40px 48px;
+  border-radius: vars.$border-radius-lg;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.heroHeadline {
+  color: vars.$primary-dark !important;
+  font-size: clamp(26px, 4.5vw, 40px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.heroSubline {
+  color: vars.$text-secondary !important;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.heroCta {
+  background: vars.$primary-color !important;
+  padding: 10px 36px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: vars.$primary-dark !important;
+  }
+}
+
+.introSection {
+  background: vars.$primary-light;
+  padding: 80px 24px;
+}
+
+.introInner {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.introImageWrap {
+  border-radius: vars.$border-radius-lg;
+  overflow: hidden;
+  box-shadow: vars.$shadow-md;
+}
+
+.introImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.introTextBlock {
+  padding: 8px 0;
+}
+
+.introTitle {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: vars.$primary-dark !important;
+}
+
+.introText {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.5px;
+  color: vars.$text-secondary !important;
+}
+
+.quickNav {
+  padding: 80px 24px;
+  background: vars.$white;
+}
+
+.quickNavGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 280px;
+  }
+}
+
+.quickNavCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .quickNavIcon {
+      background: vars.$primary-color;
+      box-shadow: vars.$shadow-md;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    .quickNavLabel {
+      color: vars.$primary-dark !important;
+    }
+  }
+}
+
+.quickNavIcon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: vars.$white;
+  border: 3px solid vars.$primary-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: vars.$shadow-sm;
+
+  img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: filter 0.25s ease;
+  }
+}
+
+.quickNavLabel {
+  color: vars.$primary-color !important;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: 70vh;
+  }
+
+  .heroPanel {
+    padding: 28px 24px;
+  }
+
+  .quickNavLabel {
+    font-size: 18px;
+  }
+}
+
+.homeProjects {
+  background: vars.$primary-light;
+}

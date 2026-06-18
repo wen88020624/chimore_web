@@ -1,0 +1,106 @@
+@use 'styles/variables.module.scss' as vars;
+
+.featuredSection {
+  padding: 72px 24px;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  background: vars.$white;
+}
+
+.sectionTitle {
+  text-align: center;
+  color: vars.$primary-color !important;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 48px;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.featuredCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.featuredImageWrap {
+  width: 100%;
+  border-radius: vars.$border-radius-lg;
+  overflow: hidden;
+  box-shadow: vars.$shadow-md;
+  border: 1px solid vars.$border-color;
+}
+
+.featuredImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.featuredTitle {
+  color: vars.$text-color !important;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.featuredDescription {
+  color: vars.$text-secondary !important;
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+  width: 100%;
+  max-width: 420px;
+}
+
+.featuredList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  max-width: 420px;
+
+  li {
+    padding: 8px 0;
+    color: vars.$text-secondary;
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 16px;
+
+    &::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: vars.$primary-color;
+      font-weight: bold;
+    }
+  }
+}
+
+.moreLinkWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.moreLink {
+  background: vars.$primary-color !important;
+
+  &:hover {
+    background: vars.$primary-dark !important;
+  }
+}
