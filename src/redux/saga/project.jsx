@@ -3,6 +3,7 @@ import {
   CREATE_PROJECT,
   DELETE_CATEGORY,
   DELETE_PROJECT,
+  FETCH_PROJECT_BY_ID,
   FETCH_PROJECT_DATA,
   RESET_PROJECT_DATA,
   UPDATE_CATEGORY,
@@ -15,6 +16,8 @@ import {
   deleteCategorySuccess,
   deleteProjectFailure,
   deleteProjectSuccess,
+  fetchProjectByIdFailure,
+  fetchProjectByIdSuccess,
   fetchProjectDataFailure,
   fetchProjectDataSuccess,
   resetProjectDataFailure,
@@ -24,44 +27,34 @@ import {
   updateProjectFailure,
   updateProjectSuccess,
 } from "@redux/actions/project";
-import {
-  generateId,
-  loadProjectData,
-  resetToSeed,
-  resolveProjectImage,
-  saveProjectData,
-} from "@utils/project-storage";
+import * as projectService from "@redux/api/projectService";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 function* fetchProjectDataSaga() {
   try {
-    const data = yield call(loadProjectData);
+    const data = yield call(projectService.fetchProjectData);
     yield put(fetchProjectDataSuccess(data));
   } catch (error) {
     yield put(fetchProjectDataFailure(error?.message || "載入專案資料失敗"));
   }
 }
 
+function* fetchProjectByIdSaga(action) {
+  try {
+    const project = yield call(
+      projectService.fetchProjectById,
+      action.payload.id,
+    );
+    yield put(fetchProjectByIdSuccess(project));
+  } catch (error) {
+    yield put(fetchProjectByIdFailure(error?.message || "載入專案失敗"));
+  }
+}
+
 function* createProjectSaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const { imageUrl, imageFile, ...rest } = action.payload;
-    const image = yield call(resolveProjectImage, imageUrl, imageFile);
-
-    const newProject = {
-      ...rest,
-      id: generateId("project"),
-      image,
-      sortOrder: data.projects.length + 1,
-    };
-
-    const nextData = {
-      categories: data.categories,
-      projects: [...data.projects, newProject],
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(createProjectSuccess(nextData));
+    const data = yield call(projectService.createProject, action.payload);
+    yield put(createProjectSuccess(data));
   } catch (error) {
     yield put(createProjectFailure(error?.message || "新增專案失敗"));
   }
@@ -69,21 +62,8 @@ function* createProjectSaga(action) {
 
 function* updateProjectSaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const { imageUrl, imageFile, ...rest } = action.payload;
-    const image = yield call(resolveProjectImage, imageUrl, imageFile);
-
-    const nextProjects = data.projects.map((project) =>
-      project.id === rest.id ? { ...project, ...rest, image } : project,
-    );
-
-    const nextData = {
-      categories: data.categories,
-      projects: nextProjects,
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(updateProjectSuccess(nextData));
+    const data = yield call(projectService.updateProject, action.payload);
+    yield put(updateProjectSuccess(data));
   } catch (error) {
     yield put(updateProjectFailure(error?.message || "更新專案失敗"));
   }
@@ -91,16 +71,8 @@ function* updateProjectSaga(action) {
 
 function* deleteProjectSaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const nextData = {
-      categories: data.categories,
-      projects: data.projects.filter(
-        (project) => project.id !== action.payload.id,
-      ),
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(deleteProjectSuccess(nextData));
+    const data = yield call(projectService.deleteProject, action.payload.id);
+    yield put(deleteProjectSuccess(data));
   } catch (error) {
     yield put(deleteProjectFailure(error?.message || "刪除專案失敗"));
   }
@@ -108,20 +80,8 @@ function* deleteProjectSaga(action) {
 
 function* createCategorySaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const newCategory = {
-      id: generateId("cat"),
-      title: action.payload.title,
-      sortOrder: data.categories.length + 1,
-    };
-
-    const nextData = {
-      categories: [...data.categories, newCategory],
-      projects: data.projects,
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(createCategorySuccess(nextData));
+    const data = yield call(projectService.createCategory, action.payload);
+    yield put(createCategorySuccess(data));
   } catch (error) {
     yield put(createCategoryFailure(error?.message || "新增分類失敗"));
   }
@@ -129,20 +89,8 @@ function* createCategorySaga(action) {
 
 function* updateCategorySaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const nextCategories = data.categories.map((category) =>
-      category.id === action.payload.id
-        ? { ...category, ...action.payload }
-        : category,
-    );
-
-    const nextData = {
-      categories: nextCategories,
-      projects: data.projects,
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(updateCategorySuccess(nextData));
+    const data = yield call(projectService.updateCategory, action.payload);
+    yield put(updateCategorySuccess(data));
   } catch (error) {
     yield put(updateCategoryFailure(error?.message || "更新分類失敗"));
   }
@@ -150,24 +98,8 @@ function* updateCategorySaga(action) {
 
 function* deleteCategorySaga(action) {
   try {
-    const data = yield call(loadProjectData);
-    const hasProjects = data.projects.some(
-      (project) => project.categoryId === action.payload.id,
-    );
-
-    if (hasProjects) {
-      throw new Error("此分類下仍有專案，請先移動或刪除專案");
-    }
-
-    const nextData = {
-      categories: data.categories.filter(
-        (category) => category.id !== action.payload.id,
-      ),
-      projects: data.projects,
-    };
-
-    yield call(saveProjectData, nextData);
-    yield put(deleteCategorySuccess(nextData));
+    const data = yield call(projectService.deleteCategory, action.payload.id);
+    yield put(deleteCategorySuccess(data));
   } catch (error) {
     yield put(deleteCategoryFailure(error?.message || "刪除分類失敗"));
   }
@@ -175,7 +107,7 @@ function* deleteCategorySaga(action) {
 
 function* resetProjectDataSaga() {
   try {
-    const data = yield call(resetToSeed);
+    const data = yield call(projectService.resetProjectData);
     yield put(resetProjectDataSuccess(data));
   } catch (error) {
     yield put(resetProjectDataFailure(error?.message || "重置資料失敗"));
@@ -184,6 +116,7 @@ function* resetProjectDataSaga() {
 
 export default function* projectSaga() {
   yield takeLatest(FETCH_PROJECT_DATA, fetchProjectDataSaga);
+  yield takeLatest(FETCH_PROJECT_BY_ID, fetchProjectByIdSaga);
   yield takeEvery(CREATE_PROJECT, createProjectSaga);
   yield takeEvery(UPDATE_PROJECT, updateProjectSaga);
   yield takeEvery(DELETE_PROJECT, deleteProjectSaga);

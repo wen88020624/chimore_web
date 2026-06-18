@@ -2,6 +2,11 @@ export const FETCH_PROJECT_DATA = "FETCH_PROJECT_DATA";
 export const FETCH_PROJECT_DATA_SUCCESS = "FETCH_PROJECT_DATA_SUCCESS";
 export const FETCH_PROJECT_DATA_FAILURE = "FETCH_PROJECT_DATA_FAILURE";
 
+export const FETCH_PROJECT_BY_ID = "FETCH_PROJECT_BY_ID";
+export const FETCH_PROJECT_BY_ID_SUCCESS = "FETCH_PROJECT_BY_ID_SUCCESS";
+export const FETCH_PROJECT_BY_ID_FAILURE = "FETCH_PROJECT_BY_ID_FAILURE";
+export const CLEAR_SELECTED_PROJECT = "CLEAR_SELECTED_PROJECT";
+
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const CREATE_PROJECT_SUCCESS = "CREATE_PROJECT_SUCCESS";
 export const CREATE_PROJECT_FAILURE = "CREATE_PROJECT_FAILURE";
@@ -40,6 +45,25 @@ export const fetchProjectDataSuccess = (payload) => ({
 export const fetchProjectDataFailure = (error) => ({
   type: FETCH_PROJECT_DATA_FAILURE,
   error,
+});
+
+export const fetchProjectById = (id) => ({
+  type: FETCH_PROJECT_BY_ID,
+  payload: { id },
+});
+
+export const fetchProjectByIdSuccess = (payload) => ({
+  type: FETCH_PROJECT_BY_ID_SUCCESS,
+  payload,
+});
+
+export const fetchProjectByIdFailure = (error) => ({
+  type: FETCH_PROJECT_BY_ID_FAILURE,
+  error,
+});
+
+export const clearSelectedProject = () => ({
+  type: CLEAR_SELECTED_PROJECT,
 });
 
 export const createProject = (payload) => ({

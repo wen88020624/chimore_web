@@ -1,0 +1,79 @@
+@use 'styles/variables.module.scss' as vars;
+
+.page {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.imageWrap {
+  border-radius: vars.$border-radius-lg;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: vars.$shadow-md;
+  border: 1px solid vars.$border-color;
+}
+
+.coverImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  color: vars.$primary-color !important;
+  margin-bottom: 1rem !important;
+}
+
+.description {
+  color: vars.$text-secondary !important;
+  line-height: 1.8;
+}
+
+.detailList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  margin: 0;
+}
+
+.detailItem {
+  dt {
+    color: vars.$text-color;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  dd {
+    margin: 0;
+    color: vars.$text-secondary;
+    line-height: 1.7;
+  }
+}
+
+.errorText {
+  margin: 1rem 0 1.5rem;
+  color: vars.$text-secondary !important;
+}
+
+.backButton {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .detailList {
+    grid-template-columns: 1fr;
+  }
+}

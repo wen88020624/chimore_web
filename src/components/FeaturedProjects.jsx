@@ -12,7 +12,15 @@ export default function FeaturedProjects({
   showMoreLink = false,
   className = "",
 }) {
-  const { featuredProjects } = useProjectData();
+  const { featuredProjects, loading } = useProjectData();
+
+  if (loading && featuredProjects.length === 0) {
+    return (
+      <section className={`${styles.featuredSection} ${className}`.trim()}>
+        <Typography level="body-md">載入案例中...</Typography>
+      </section>
+    );
+  }
 
   return (
     <section className={`${styles.featuredSection} ${className}`.trim()}>
@@ -23,36 +31,42 @@ export default function FeaturedProjects({
       )}
       <div className={styles.featuredGrid}>
         {featuredProjects.map((project) => (
-          <article key={project.id} className={styles.featuredCard}>
-            <div className={styles.featuredImageWrap}>
-              <Image
-                src={project.image || "/assets/projectInHome1.jpg"}
-                alt={project.title}
-                width={600}
-                height={420}
-                className={styles.featuredImage}
-                unoptimized={
-                  project.image?.startsWith("data:") ||
-                  project.image?.startsWith("blob:")
-                }
-              />
-            </div>
-            <Typography level="title-lg" className={styles.featuredTitle}>
-              {project.title}
-            </Typography>
-            {project.description && (
-              <Typography className={styles.featuredDescription}>
-                {project.description}
+          <Link
+            key={project.id}
+            href={`/projects/${project.id}`}
+            className={styles.featuredCardLink}
+          >
+            <article className={styles.featuredCard}>
+              <div className={styles.featuredImageWrap}>
+                <Image
+                  src={project.image || "/assets/projectInHome1.jpg"}
+                  alt={project.title}
+                  width={600}
+                  height={420}
+                  className={styles.featuredImage}
+                  unoptimized={
+                    project.image?.startsWith("data:") ||
+                    project.image?.startsWith("blob:")
+                  }
+                />
+              </div>
+              <Typography level="title-lg" className={styles.featuredTitle}>
+                {project.title}
               </Typography>
-            )}
-            {!project.description && project.items?.length > 0 && (
-              <ul className={styles.featuredList}>
-                {project.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </article>
+              {project.description && (
+                <Typography className={styles.featuredDescription}>
+                  {project.description}
+                </Typography>
+              )}
+              {!project.description && project.items?.length > 0 && (
+                <ul className={styles.featuredList}>
+                  {project.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          </Link>
         ))}
       </div>
       {showMoreLink && (

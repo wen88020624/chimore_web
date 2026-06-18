@@ -3,10 +3,11 @@
 import { FeaturedProjects, PageBanner } from "@components";
 import useProjectData from "@hooks/use-project-data";
 import Typography from "@mui/joy/Typography";
+import Link from "next/link";
 import styles from "./page.module.scss";
 
 export default function ProjectsContent() {
-  const { projectCategories } = useProjectData();
+  const { projectCategories, loading } = useProjectData();
 
   return (
     <>
@@ -19,20 +20,33 @@ export default function ProjectsContent() {
       <FeaturedProjects />
 
       <section className={styles.listSection}>
-        <div className={styles.categoryGrid}>
-          {projectCategories.map((category) => (
-            <article key={category.title} className={styles.categoryColumn}>
-              <Typography level="title-md" className={styles.categoryTitle}>
-                {category.title}
-              </Typography>
-              <ol className={styles.projectList}>
-                {category.projects.map((project) => (
-                  <li key={project}>{project}</li>
-                ))}
-              </ol>
-            </article>
-          ))}
-        </div>
+        {loading && projectCategories.length === 0 ? (
+          <Typography level="body-md" className={styles.loading}>
+            載入案例中...
+          </Typography>
+        ) : (
+          <div className={styles.categoryGrid}>
+            {projectCategories.map((category) => (
+              <article key={category.id} className={styles.categoryColumn}>
+                <Typography level="title-md" className={styles.categoryTitle}>
+                  {category.title}
+                </Typography>
+                <ol className={styles.projectList}>
+                  {category.projects.map((project) => (
+                    <li key={project.id}>
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className={styles.projectLink}
+                      >
+                        {project.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ol>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </>
   );

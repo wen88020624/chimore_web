@@ -27,6 +27,17 @@
   }
 }
 
+.featuredCardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
 .featuredCard {
   display: flex;
   flex-direction: column;

@@ -42,3 +42,21 @@
     line-height: 1.7;
   }
 }
+
+.projectLink {
+  color: vars.$text-secondary;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: vars.$primary-color;
+    text-decoration: underline;
+  }
+}
+
+.loading {
+  text-align: center;
+  color: vars.$text-secondary;
+  max-width: vars.$max-width;
+  margin: 0 auto;
+}

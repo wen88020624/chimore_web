@@ -1,4 +1,5 @@
 import {
+  CLEAR_SELECTED_PROJECT,
   CREATE_CATEGORY,
   CREATE_CATEGORY_FAILURE,
   CREATE_CATEGORY_SUCCESS,
@@ -11,6 +12,9 @@ import {
   DELETE_PROJECT,
   DELETE_PROJECT_FAILURE,
   DELETE_PROJECT_SUCCESS,
+  FETCH_PROJECT_BY_ID,
+  FETCH_PROJECT_BY_ID_FAILURE,
+  FETCH_PROJECT_BY_ID_SUCCESS,
   FETCH_PROJECT_DATA,
   FETCH_PROJECT_DATA_FAILURE,
   FETCH_PROJECT_DATA_SUCCESS,
@@ -28,9 +32,12 @@ import {
 const initialState = {
   categories: [],
   projects: [],
+  selectedProject: null,
   loading: false,
   saving: false,
+  selectedProjectLoading: false,
   error: null,
+  selectedProjectError: null,
 };
 
 export default function projectReducer(state, action) {
@@ -52,6 +59,35 @@ export default function projectReducer(state, action) {
     case FETCH_PROJECT_DATA_FAILURE:
       return { ...currentState, loading: false, error: action.error };
 
+    case FETCH_PROJECT_BY_ID:
+      return {
+        ...currentState,
+        selectedProjectLoading: true,
+        selectedProjectError: null,
+        selectedProject: null,
+      };
+    case FETCH_PROJECT_BY_ID_SUCCESS:
+      return {
+        ...currentState,
+        selectedProjectLoading: false,
+        selectedProject: action.payload,
+        selectedProjectError: null,
+      };
+    case FETCH_PROJECT_BY_ID_FAILURE:
+      return {
+        ...currentState,
+        selectedProjectLoading: false,
+        selectedProject: null,
+        selectedProjectError: action.error,
+      };
+    case CLEAR_SELECTED_PROJECT:
+      return {
+        ...currentState,
+        selectedProject: null,
+        selectedProjectLoading: false,
+        selectedProjectError: null,
+      };
+
     case CREATE_PROJECT:
     case UPDATE_PROJECT:
     case DELETE_PROJECT:
@@ -72,6 +108,15 @@ export default function projectReducer(state, action) {
         saving: false,
         categories: action.payload.categories,
         projects: action.payload.projects,
+        selectedProject:
+          currentState.selectedProject &&
+          action.payload.projects.some(
+            (project) => project.id === currentState.selectedProject.id,
+          )
+            ? action.payload.projects.find(
+                (project) => project.id === currentState.selectedProject.id,
+              )
+            : currentState.selectedProject,
         error: null,
       };
 

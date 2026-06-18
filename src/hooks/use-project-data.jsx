@@ -1,84 +1,40 @@
 "use client";
 
-import { getSeedData } from "@utils/project-seed-data";
-import { loadProjectData } from "@utils/project-storage";
-import { useCallback, useEffect, useMemo, useState } from "react";
-
-function buildFeaturedProjects(projects) {
-  return projects
-    .filter((project) => project.isFeatured)
-    .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map((project) => ({
-      id: project.id,
-      title: project.title,
-      image: project.image || "/assets/projectInHome1.jpg",
-      description: project.description,
-      items: project.description ? undefined : [],
-    }));
-}
-
-function buildProjectCategories(categories, projects) {
-  return [...categories]
-    .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map((category) => ({
-      title: category.title,
-      projects: projects
-        .filter((project) => project.categoryId === category.id)
-        .sort((a, b) => a.sortOrder - b.sortOrder)
-        .map((project) => project.title),
-    }))
-    .filter((category) => category.projects.length > 0);
-}
+import { useDispatch, useSelector } from "@hooks/use-redux";
+import { fetchProjectData } from "@redux/actions/project";
+import {
+  buildFeaturedProjects,
+  buildProjectCategories,
+} from "@utils/project-view-utils";
+import { useEffect, useMemo } from "react";
 
 export default function useProjectData() {
-  const [data, setData] = useState(() => {
-    if (typeof window === "undefined") {
-      return getSeedData();
-    }
-    return loadProjectData();
-  });
-
-  const refresh = useCallback(() => {
-    setData(loadProjectData());
-  }, []);
+  const dispatch = useDispatch();
+  const { categories, projects, loading, error } = useSelector(
+    (state) => state.project,
+  );
 
   useEffect(() => {
-    refresh();
-
-    const handleStorage = (event) => {
-      if (event.key === "chimore_projects_v1") {
-        refresh();
-      }
-    };
-
-    const handleCustomUpdate = () => refresh();
-
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener("chimore-projects-updated", handleCustomUpdate);
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener(
-        "chimore-projects-updated",
-        handleCustomUpdate,
-      );
-    };
-  }, [refresh]);
+    dispatch(fetchProjectData());
+  }, [dispatch]);
 
   const featuredProjects = useMemo(
-    () => buildFeaturedProjects(data.projects),
-    [data.projects],
+    () => buildFeaturedProjects(projects),
+    [projects],
   );
 
   const projectCategories = useMemo(
-    () => buildProjectCategories(data.categories, data.projects),
-    [data.categories, data.projects],
+    () => buildProjectCategories(categories, projects),
+    [categories, projects],
   );
 
   return {
-    categories: data.categories,
-    projects: data.projects,
+    categories,
+    projects,
     featuredProjects,
     projectCategories,
-    refresh,
+    loading,
+    error,
+    refresh: () => dispatch(fetchProjectData()),
   };
 }

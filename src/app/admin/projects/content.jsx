@@ -8,6 +8,7 @@ import Button from "@mui/joy/Button";
 import Stack from "@mui/joy/Stack";
 import Typography from "@mui/joy/Typography";
 import { fetchProjectData, resetProjectData } from "@redux/actions/project";
+import { isUseProjectMock } from "@utils/project-config";
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 
@@ -18,6 +19,7 @@ export default function AdminProjectsContent() {
   );
   const [editingProject, setEditingProject] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const useMock = isUseProjectMock();
 
   useEffect(() => {
     dispatch(fetchProjectData());
@@ -44,12 +46,18 @@ export default function AdminProjectsContent() {
     }
   };
 
+  const handleReload = () => {
+    dispatch(fetchProjectData());
+  };
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
         <Typography level="h2">案例實績管理</Typography>
         <Typography level="body-md" className={styles.subtitle}>
-          管理分類與專案內容，資料暫存於 localStorage，後續可串接 API。
+          {useMock
+            ? "目前為 mock 模式，資料由本地 mock service 提供，後端就緒後可切換 API。"
+            : "資料由後端 API 提供，所有使用者將看到相同內容。"}
         </Typography>
       </header>
 
@@ -68,9 +76,15 @@ export default function AdminProjectsContent() {
       <section className={styles.toolbar}>
         <Stack direction="row" spacing={1} className={styles.toolbarActions}>
           <Button onClick={handleAdd}>新增專案</Button>
-          <Button variant="outlined" color="neutral" onClick={handleReset}>
-            重置假資料
-          </Button>
+          {useMock ? (
+            <Button variant="outlined" color="neutral" onClick={handleReset}>
+              重置假資料
+            </Button>
+          ) : (
+            <Button variant="outlined" color="neutral" onClick={handleReload}>
+              重新載入
+            </Button>
+          )}
         </Stack>
       </section>
 
