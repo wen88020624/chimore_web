@@ -1,0 +1,36 @@
+.panel {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--joy-palette-background-surface);
+  box-shadow: var(--joy-shadow-sm);
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 480px;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.count {
+  color: var(--joy-palette-neutral-600);
+  min-width: 5rem;
+}

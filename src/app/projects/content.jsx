@@ -1,11 +1,13 @@
 "use client";
 
 import { FeaturedProjects, PageBanner } from "@components";
+import useProjectData from "@hooks/use-project-data";
 import Typography from "@mui/joy/Typography";
-import { projectCategories } from "@utils/site-data";
 import styles from "./page.module.scss";
 
 export default function ProjectsContent() {
+  const { projectCategories } = useProjectData();
+
   return (
     <>
       <PageBanner

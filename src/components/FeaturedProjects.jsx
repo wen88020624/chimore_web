@@ -1,6 +1,8 @@
+"use client";
+
+import useProjectData from "@hooks/use-project-data";
 import Button from "@mui/joy/Button";
 import Typography from "@mui/joy/Typography";
-import { featuredProjects } from "@utils/site-data";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./FeaturedProjects.module.scss";
@@ -10,6 +12,8 @@ export default function FeaturedProjects({
   showMoreLink = false,
   className = "",
 }) {
+  const { featuredProjects } = useProjectData();
+
   return (
     <section className={`${styles.featuredSection} ${className}`.trim()}>
       {showTitle && (
@@ -22,11 +26,15 @@ export default function FeaturedProjects({
           <article key={project.id} className={styles.featuredCard}>
             <div className={styles.featuredImageWrap}>
               <Image
-                src={project.image}
+                src={project.image || "/assets/projectInHome1.jpg"}
                 alt={project.title}
                 width={600}
                 height={420}
                 className={styles.featuredImage}
+                unoptimized={
+                  project.image?.startsWith("data:") ||
+                  project.image?.startsWith("blob:")
+                }
               />
             </div>
             <Typography level="title-lg" className={styles.featuredTitle}>
