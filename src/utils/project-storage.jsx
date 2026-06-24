@@ -1,6 +1,6 @@
 import { getSeedData } from "./project-seed-data";
 
-const STORAGE_KEY = "chimore_projects_v1";
+const STORAGE_KEY = "chimore_projects_v2";
 
 function isBrowser() {
   return typeof window !== "undefined";

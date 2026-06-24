@@ -141,7 +141,7 @@ export default function ProjectEditModal({
             <FormField
               name="client"
               control={control}
-              label="委託單位"
+              label="實施者"
               placeholder="例：苗栗縣政府"
             />
             <FormField

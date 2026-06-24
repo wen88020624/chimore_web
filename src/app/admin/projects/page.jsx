@@ -1,7 +1,7 @@
 import Content from "./content";
 
 export const metadata = {
-  title: "案例實績管理 | 奇模都市計畫顧問",
+  title: "案例實績管理 | 奇模工程有限公司",
   robots: { index: false, follow: false },
 };
 

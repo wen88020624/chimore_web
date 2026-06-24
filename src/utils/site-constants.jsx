@@ -1,6 +1,6 @@
 export const PLACEHOLDER_IMAGE = "/assets/office.jpg";
 
-export const COMPANY_NAME = "奇模都市計畫顧問有限公司";
+export const COMPANY_NAME = "奇模工程有限公司";
 
 export const FACEBOOK_URL = "https://www.facebook.com";
 

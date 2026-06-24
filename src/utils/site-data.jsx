@@ -106,64 +106,6 @@ export const serviceSections = [
   },
 ];
 
-export const featuredProjects = [
-  {
-    id: "wugu",
-    title: "新北市五股區審議大會通過",
-    image: "/assets/projectInHome1.jpg",
-    description:
-      "賀擬訂新北市五股區中興段777地號(原更寮段褒子寮小段73-4地號)等9筆(原5筆)土地都市更新事業計畫案 審議大會通過",
-    items: ["中興段777地號等9筆土地", "都市更新事業計畫案", "審議大會通過"],
-  },
-  {
-    id: "zhonghe",
-    title: "新北市中和區審議大會通過",
-    image: "/assets/projectInHome2.jpg",
-    description:
-      "賀擬訂新北市中和區健康段954地號等7筆土地都市更新事業計畫案 審議大會通過",
-    items: ["健康段954地號等7筆土地", "都市更新事業計畫案", "審議大會通過"],
-  },
-];
-
-export const projectCategories = [
-  {
-    title: "新北市都市更新",
-    projects: [
-      "五股區中興段都市更新事業計畫案",
-      "中和區健康段都市更新事業計畫案",
-      "板橋區○○段都市更新評估案",
-      "三重區○○段事業計畫編撰案",
-    ],
-  },
-  {
-    title: "台北市都市計畫",
-    projects: [
-      "信義區土地使用分區變更案",
-      "內湖區細部計畫檢討案",
-      "士林區○○段開發許可輔導案",
-      "北投區○○段規劃研究案",
-    ],
-  },
-  {
-    title: "區域與政策規劃",
-    projects: [
-      "○○縣區域計畫修訂案",
-      "○○市產業園區發展策略研究",
-      "交通節點周邊土地使用檢討",
-      "公共設施用地配置分析",
-    ],
-  },
-  {
-    title: "規劃研究專案",
-    projects: [
-      "社會住宅選址可行性研究",
-      "TOD 導向開發潛力評估",
-      "都市設計與景觀視覺分析",
-      "環境影響與生態檢討輔助",
-    ],
-  },
-];
-
 export const environmentPhotos = Array.from({ length: 6 }, (_, i) => ({
   id: `env-${i + 1}`,
   alt: `辦公環境 ${i + 1}`,

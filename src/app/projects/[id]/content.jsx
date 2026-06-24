@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import styles from "./page.module.scss";
 
 const DETAIL_FIELDS = [
-  { key: "client", label: "委託單位" },
+  { key: "client", label: "實施者" },
   { key: "siteLocation", label: "基地位置" },
   { key: "siteArea", label: "基地面積" },
   { key: "features", label: "專案特色" },

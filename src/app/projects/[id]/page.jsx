@@ -4,7 +4,7 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
 
   return {
-    title: "案例實績 | 奇模都市計畫顧問",
+    title: "案例實績 | 奇模工程有限公司",
     description: `案例實績詳情 - ${id}`,
   };
 }

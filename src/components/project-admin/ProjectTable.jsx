@@ -27,7 +27,7 @@ import styles from "./ProjectTable.module.scss";
 const SORTABLE_COLUMNS = [
   { key: "title", label: "標題" },
   { key: "categoryId", label: "分類" },
-  { key: "client", label: "委託單位" },
+  { key: "client", label: "實施者" },
   { key: "status", label: "狀態" },
   { key: "isFeatured", label: "精選" },
 ];
@@ -175,7 +175,7 @@ export default function ProjectTable({ projects, categories, onEdit, saving }) {
                     {column.key === "client" && (
                       <Input
                         size="sm"
-                        placeholder="篩選委託單位"
+                        placeholder="篩選實施者"
                         value={filters.client}
                         onChange={(event) =>
                           handleFilterChange("client", event.target.value)
