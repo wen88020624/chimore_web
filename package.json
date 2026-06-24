@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "typescipt": "^1.0.0",
+    "typescript": "^6.0.3"
   }
 }
