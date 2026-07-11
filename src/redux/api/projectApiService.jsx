@@ -6,28 +6,7 @@ import {
   toApiProjectPayload,
   unwrapList,
 } from "@utils/project-normalize";
-
-function buildProjectFormData(payload) {
-  const formData = new FormData();
-  const { imageFile, imageUrl, id, ...rest } = payload;
-  const apiFields = toApiProjectPayload(rest);
-
-  for (const [key, value] of Object.entries(apiFields)) {
-    formData.append(key, typeof value === "boolean" ? String(value) : value);
-  }
-
-  if (imageFile instanceof File) {
-    formData.append("image", imageFile);
-  } else if (imageUrl) {
-    formData.append("imageUrl", imageUrl);
-  }
-
-  if (id) {
-    formData.append("id", id);
-  }
-
-  return formData;
-}
+import { generateId, resolveProjectImage } from "@utils/project-storage";
 
 async function fetchCollections() {
   const [categoriesResponse, projectsResponse] = await Promise.all([
@@ -52,18 +31,35 @@ export async function fetchProjectById(id) {
 }
 
 export async function createProject(payload) {
+  const collections = await fetchCollections();
+  const { imageUrl, imageFile, ...rest } = payload;
+  const image = await resolveProjectImage(imageUrl, imageFile);
+
   await fetchProjectApi(API.PROJECTS, {
     method: "POST",
-    body: buildProjectFormData(payload),
+    body: JSON.stringify({
+      id: generateId("project"),
+      ...toApiProjectPayload(rest),
+      imageUrl: image,
+      sortOrder: collections.projects.length + 1,
+    }),
   });
+
   return fetchCollections();
 }
 
 export async function updateProject(payload) {
-  await fetchProjectApi(`${API.PROJECTS}/${payload.id}`, {
+  const { imageUrl, imageFile, id, ...rest } = payload;
+  const image = await resolveProjectImage(imageUrl, imageFile);
+
+  await fetchProjectApi(`${API.PROJECTS}/${id}`, {
     method: "PUT",
-    body: buildProjectFormData(payload),
+    body: JSON.stringify({
+      ...toApiProjectPayload({ ...rest, id }),
+      imageUrl: image,
+    }),
   });
+
   return fetchCollections();
 }
 
@@ -75,10 +71,17 @@ export async function deleteProject(id) {
 }
 
 export async function createCategory(payload) {
+  const collections = await fetchCollections();
+
   await fetchProjectApi(API.PROJECT_CATEGORIES, {
     method: "POST",
-    body: JSON.stringify(payload),
+    body: JSON.stringify({
+      id: generateId("cat"),
+      title: payload.title,
+      sortOrder: collections.categories.length + 1,
+    }),
   });
+
   return fetchCollections();
 }
 

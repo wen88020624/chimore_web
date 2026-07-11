@@ -1,4 +1,8 @@
 function getErrorMessage(errorBody, fallback) {
+  if (Array.isArray(errorBody?.message)) {
+    return errorBody.message.join("、");
+  }
+
   if (typeof errorBody?.message === "string") {
     return errorBody.message;
   }
