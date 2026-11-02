@@ -8,3 +8,4 @@ export { default as SectionTitle } from "./SectionTitle";
 export { default as FeaturedProjects } from "./FeaturedProjects";
 export { default as GoogleMapEmbed } from "./GoogleMapEmbed";
 export { default as FacebookLink } from "./SocialLink";
+export * from "./icons";

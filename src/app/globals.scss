@@ -7,9 +7,8 @@
 }
 
 :root {
-  font-family: 'Microsoft JhengHei', Inter, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
-  line-height: 1.5;
+  font-family: vars.$font-sans;
+  line-height: 1.75;
   font-weight: 400;
   color: vars.$text-color;
   background-color: vars.$white;
@@ -27,4 +26,10 @@ body {
 
 a {
   color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid vars.$primary-color;
+  outline-offset: 3px;
 }

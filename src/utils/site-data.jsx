@@ -2,21 +2,46 @@ import { PLACEHOLDER_IMAGE } from "./site-constants";
 
 export const homeHero = {
   headline: "專業都更，展望未來",
-  subline: "安居樂業 · 永續共生",
+  subline: "安居樂業 × 永續共生",
+  description:
+    "區域計畫、都市計畫與都市更新的專業顧問，從可行性評估陪您走到審議通過。",
   ctaLabel: "了解更多",
   ctaHref: "/intro",
 };
 
 export const homeIntro = {
   title: "奇模簡介",
+  subtitle: "成立於 2006 年・台北",
   description:
     "奇模成立於2006年，主要營業項目包括區域計畫、都市計畫、都市更新以及各種主題之規劃研究，以成為多元化經營與發展的都市計畫專業顧問公司為目標。對於都市計畫通盤檢討及個案變更均涉獵極深，目前亦執行許多個案變更之案例。",
+  facts: [
+    { label: "主要業務", value: "區域計畫・都市計畫・都市更新" },
+    { label: "服務地區", value: "台北市・新北市" },
+  ],
 };
 
 export const quickNavLinks = [
-  { href: "/intro", label: "公司簡介", icon: "/assets/goIntroImg.svg" },
-  { href: "/service", label: "服務項目", icon: "/assets/goServiceImg.svg" },
-  { href: "/projects", label: "案例實績", icon: "/assets/goProjectsImg.svg" },
+  {
+    href: "/intro",
+    label: "公司簡介",
+    icon: "building",
+    image: "/assets/office.jpg",
+    imageAlt: "奇模台北辦公室",
+  },
+  {
+    href: "/service",
+    label: "服務項目",
+    icon: "blueprint",
+    image: "/assets/workspaceEnv.jpg",
+    imageAlt: "團隊討論規劃內容",
+  },
+  {
+    href: "/projects",
+    label: "案例實績",
+    icon: "cases",
+    image: "/assets/serviceImg.jpg",
+    imageAlt: "住宅大樓外觀",
+  },
 ];
 
 export const introPhilosophy = {
@@ -45,12 +70,12 @@ export const teamStats = [
 ];
 
 export const serviceIcons = [
-  { icon: "/assets/goIntroImg.svg", label: "區域計畫" },
-  { icon: "/assets/goServiceImg.svg", label: "都市計畫" },
-  { icon: "/assets/goProjectsImg.svg", label: "都市更新" },
-  { icon: "/assets/goIntroImg.svg", label: "規劃研究" },
-  { icon: "/assets/goServiceImg.svg", label: "可行性評估" },
-  { icon: "/assets/goProjectsImg.svg", label: "審議協助" },
+  { icon: "region", label: "區域計畫" },
+  { icon: "zoning", label: "都市計畫" },
+  { icon: "renewal", label: "都市更新" },
+  { icon: "research", label: "規劃研究" },
+  { icon: "feasibility", label: "可行性評估" },
+  { icon: "review", label: "審議協助" },
 ];
 
 export const serviceSections = [

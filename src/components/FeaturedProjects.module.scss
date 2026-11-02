@@ -1,117 +1,180 @@
 @use 'styles/variables.module.scss' as vars;
 
 .featuredSection {
-  padding: 72px 24px;
-  max-width: vars.$max-width;
-  margin: 0 auto;
+  padding-top: 88px;
   background: vars.$white;
 }
 
+.loading {
+  text-align: center;
+  padding-bottom: 88px;
+}
+
+.heading {
+  max-width: vars.$max-width;
+  margin: 0 auto 44px;
+  padding: 0 24px;
+  text-align: center;
+}
+
 .sectionTitle {
-  text-align: center;
-  color: vars.$primary-color !important;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 48px;
-}
-
-.featuredGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 64px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-}
-
-.featuredCardLink {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.featuredCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-}
-
-.featuredImageWrap {
-  width: 100%;
-  border-radius: vars.$border-radius-lg;
-  overflow: hidden;
-  box-shadow: vars.$shadow-md;
-  border: 1px solid vars.$border-color;
-}
-
-.featuredImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-.featuredTitle {
-  color: vars.$text-color !important;
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-.featuredDescription {
-  color: vars.$text-secondary !important;
-  font-size: 14px;
-  line-height: 1.8;
-  text-align: left;
-  width: 100%;
-  max-width: 420px;
-}
-
-.featuredList {
-  list-style: none;
-  padding: 0;
   margin: 0;
-  text-align: left;
-  width: 100%;
-  max-width: 420px;
+  font-family: vars.$font-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: vars.$primary-dark;
+}
 
-  li {
-    padding: 8px 0;
-    color: vars.$text-secondary;
-    font-size: 14px;
-    line-height: 1.7;
-    position: relative;
-    padding-left: 16px;
+.sectionSubtitle {
+  margin: 8px 0 0;
+  color: vars.$text-secondary;
+}
 
-    &::before {
-      content: '·';
-      position: absolute;
-      left: 0;
-      color: vars.$primary-color;
-      font-weight: bold;
+// 滿版左右交錯：一半照片、一半文字
+.caseRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  // caseRowFlip 也帶有 caseRow class
+  & + & {
+    border-top: 1px solid vars.$border-color;
+  }
+}
+
+.caseRowFlip {
+  composes: caseRow;
+
+  .caseImage {
+    order: 2;
+  }
+
+  .caseText {
+    justify-self: end;
+  }
+}
+
+.caseImage {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    img {
+      transition: transform 0.6s ease;
+    }
+
+    .caseRow:hover & img {
+      transform: scale(1.04);
     }
   }
+}
+
+.caseText {
+  max-width: 640px;
+  padding: 56px clamp(24px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 500;
+  color: vars.$primary-dark;
+  background: vars.$primary-light;
+  padding: 2px 12px;
+  border-radius: 999px;
+}
+
+.caseTitle {
+  margin: 0;
+  font-family: vars.$font-serif;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 700;
+  line-height: 1.45;
+  color: vars.$accent-earth;
+}
+
+.caseDescription {
+  margin: 0;
+  color: vars.$text-secondary;
+  text-align: justify;
+}
+
+.caseFacts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 20px;
+  font-size: 15px;
+
+  dt {
+    color: vars.$text-secondary;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.caseLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: vars.$primary-color;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
 
 .moreLinkWrap {
   display: flex;
   justify-content: center;
-  margin-top: 48px;
+  padding: 48px 24px 88px;
 }
 
 .moreLink {
-  background: vars.$primary-color !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 28px;
+  border: 1.5px solid vars.$primary-color;
+  color: vars.$primary-color;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
-    background: vars.$primary-dark !important;
+    background: vars.$primary-color;
+    color: vars.$white;
+  }
+}
+
+@media (max-width: 820px) {
+  .caseRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .caseRowFlip .caseImage {
+    order: 0;
+  }
+
+  .caseImage {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .caseText {
+    padding: 32px 24px 48px;
   }
 }

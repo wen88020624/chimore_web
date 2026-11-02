@@ -35,11 +35,7 @@
   justify-content: center;
   transition: transform 0.25s ease;
 
-  img {
-    width: 56px;
-    height: 56px;
-    object-fit: contain;
-  }
+  color: vars.$primary-color;
 
   &:hover {
     transform: scale(1.05);

@@ -11,7 +11,9 @@ export function buildFeaturedProjects(projects) {
       title: project.title,
       image: project.image || "/assets/projectInHome1.jpg",
       description: project.description,
-      items: project.description ? undefined : [],
+      status: project.status,
+      client: project.client,
+      features: project.features,
     }));
 }
 

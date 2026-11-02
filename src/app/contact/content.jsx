@@ -12,7 +12,7 @@ export default function ContactContent() {
         src="/assets/contactUsBanner.jpg"
         alt="聯絡我們"
         title="聯絡我們"
-        subtitle="Contact Us"
+        subtitle="有都市計畫或都更的問題，歡迎留言，我們會盡快回覆。"
       />
 
       {OFFICES.map((office) => (

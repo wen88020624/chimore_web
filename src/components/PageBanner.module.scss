@@ -1,68 +1,92 @@
 @use 'styles/variables.module.scss' as vars;
 
 .pageBanner {
-  position: relative;
-  width: 100%;
-  height: 320px;
+  background: vars.$band-bg;
+  border-bottom: 1px solid vars.$border-color;
   overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.45)
-  );
+.inner {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding-left: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 260px;
 }
 
-.bannerContent {
-  position: absolute;
-  inset: 0;
+.text {
+  padding: 48px 24px 48px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  color: vars.$white;
-  padding: 24px;
+  gap: 8px;
+}
+
+.crumbs {
+  font-size: 14px;
+  color: vars.$text-secondary;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: vars.$primary-dark;
+    }
+  }
 }
 
 .pageBannerTitle {
-  font-size: 42px;
-  font-weight: 600;
-  letter-spacing: 6px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   margin: 0;
+  font-family: vars.$font-serif;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  color: vars.$primary-dark;
+  text-wrap: balance;
 }
 
 .pageBannerSubtitle {
-  font-size: 16px;
-  letter-spacing: 2px;
-  margin-top: 8px;
-  opacity: 0.9;
-  text-transform: uppercase;
+  margin: 0;
+  max-width: 28em;
+  color: vars.$text-secondary;
 }
 
-@media (max-width: 768px) {
-  .pageBanner {
-    height: 240px;
+// 照片延伸到視窗右緣，左側以底色漸層銜接文字區
+.photo {
+  position: relative;
+  margin-right: calc((100vw - min(100vw, #{vars.$max-width})) / -2);
+
+  img {
+    object-fit: cover;
   }
 
-  .pageBannerTitle {
-    font-size: 28px;
-    letter-spacing: 4px;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      vars.$band-bg 0%,
+      rgba(245, 249, 247, 0) 35%
+    );
+  }
+}
+
+@media (max-width: 820px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding-right: 24px;
   }
 
-  .pageBannerSubtitle {
-    font-size: 14px;
+  .text {
+    padding: 36px 0;
+  }
+
+  .photo {
+    display: none;
   }
 }

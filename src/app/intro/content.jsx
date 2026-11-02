@@ -22,6 +22,7 @@ export default function IntroContent() {
         src="/assets/introBanner.jpg"
         alt="認識奇模"
         title="認識奇模"
+        subtitle="2006 年成立於台北，專注都市計畫與都市更新的專業顧問團隊。"
       />
 
       <section className={`${styles.section} ${styles.philosophySection}`}>

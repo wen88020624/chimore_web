@@ -15,6 +15,7 @@ export default function ProjectsContent() {
         src="/assets/projectsBanner.jpg"
         alt="案例實績"
         title="案例實績"
+        subtitle="台北市與新北市的都市更新與都市計畫案件。"
       />
 
       <FeaturedProjects />

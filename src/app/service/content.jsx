@@ -1,10 +1,9 @@
 "use client";
 
-import { CircularImage, PageBanner, SectionTitle } from "@components";
+import { CircularImage, Icon, PageBanner, SectionTitle } from "@components";
 import Typography from "@mui/joy/Typography";
 import { PLACEHOLDER_IMAGE } from "@utils/site-constants";
 import { serviceIcons, serviceSections } from "@utils/site-data";
-import Image from "next/image";
 import styles from "./page.module.scss";
 
 export default function ServiceContent() {
@@ -14,6 +13,7 @@ export default function ServiceContent() {
         src="/assets/serviceBanner.jpg"
         alt="服務項目"
         title="服務項目"
+        subtitle="從前期評估、計畫編撰到審議協助，提供完整的顧問服務。"
       />
 
       <section className={styles.iconSection}>
@@ -21,12 +21,7 @@ export default function ServiceContent() {
           {serviceIcons.map((item) => (
             <article key={item.label} className={styles.iconCard}>
               <div className={styles.iconCircle}>
-                <Image
-                  src={item.icon}
-                  alt={item.label}
-                  width={64}
-                  height={64}
-                />
+                <Icon name={item.icon} size={36} />
               </div>
               <Typography level="body-md">{item.label}</Typography>
             </article>

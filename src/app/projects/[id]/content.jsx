@@ -74,6 +74,7 @@ export default function ProjectDetailContent({ projectId }) {
         src="/assets/projectsBanner.jpg"
         alt={selectedProject.title}
         title={selectedProject.title}
+        crumbs={[{ href: "/projects", label: "案例實績" }]}
       />
 
       <article className={styles.page}>

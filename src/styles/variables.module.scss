@@ -1,20 +1,26 @@
-$primary-color: #008b8b;
-$primary-dark: #006d6d;
-$primary-light: #e6f4f4;
-$text-color: #2c2c2c;
-$text-secondary: #555;
-$text-muted: #777;
-$text-light: #999;
-$border-color: #e8e8e8;
-$footer-bg: #2a2a2a;
+$primary-color: #2e7d6b;
+$primary-dark: #23604f;
+$primary-light: #e6f1ec;
+$band-bg: #f5f9f7;
+$accent-earth: #8a6644;
+$text-color: #2b3330;
+$text-secondary: #5c6763;
+$text-muted: #6f7a76;
+$text-light: #99a39f;
+$border-color: #e3eae6;
+$footer-bg: #eef4f1;
+$footer-text: #4a5551;
 $dark-brown: #3d3128;
 $white: #fff;
-$max-width: 1200px;
-$header-height: 72px;
-$border-radius: 8px;
-$border-radius-lg: 16px;
-$shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
-$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+$max-width: 1160px;
+$header-height: 76px;
+$border-radius: 4px;
+$border-radius-lg: 8px;
+$shadow-sm: 0 2px 10px rgba(30, 70, 60, 0.06);
+$shadow-md: 0 8px 24px rgba(30, 70, 60, 0.1);
+$font-sans: var(--font-sans), 'PingFang TC', 'Microsoft JhengHei', system-ui,
+  sans-serif;
+$font-serif: var(--font-serif), 'Songti TC', 'PMingLiU', serif;
 
 :export {
   primaryColor: $primary-color;

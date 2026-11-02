@@ -33,8 +33,8 @@ export default function Header() {
             <Image
               src="/assets/chimore.png"
               alt="奇模"
-              width={48}
-              height={48}
+              width={44}
+              height={44}
               priority
               className={styles.brandIcon}
             />

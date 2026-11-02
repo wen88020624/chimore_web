@@ -1,6 +1,6 @@
 import { FACEBOOK_URL } from "@utils/site-constants";
-import Image from "next/image";
 import styles from "./SocialLink.module.scss";
+import { FacebookIcon } from "./icons";
 
 export default function FacebookLink() {
   return (
@@ -10,7 +10,7 @@ export default function FacebookLink() {
       rel="noopener noreferrer"
       className={styles.facebookLink}
     >
-      <Image src="/assets/facebook.svg" alt="Facebook" width={24} height={24} />
+      <FacebookIcon size={22} />
       <span>Facebook 粉絲專頁</span>
     </a>
   );

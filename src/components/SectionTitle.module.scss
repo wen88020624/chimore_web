@@ -4,9 +4,10 @@
   display: block;
   width: 100%;
   text-align: center !important;
-  color: vars.$primary-color !important;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 32px;
+  font-family: vars.$font-serif !important;
+  color: vars.$primary-dark !important;
+  font-size: clamp(26px, 3vw, 36px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
 }

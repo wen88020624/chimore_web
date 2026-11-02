@@ -2,14 +2,47 @@
 
 .siteFooter {
   background: vars.$footer-bg;
-  color: rgba(255, 255, 255, 0.75);
-  padding: 10px 16px;
-  margin-top: 0;
+  color: vars.$footer-text;
+  border-top: 1px solid vars.$border-color;
+}
+
+.footerInner {
+  max-width: vars.$max-width;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  font-size: 14px;
 }
 
 .copyright {
   margin: 0;
-  font-size: 12px;
-  text-align: center;
-  letter-spacing: 0.3px;
+}
+
+.footerNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: vars.$primary-dark;
+    }
+  }
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+
+  &:hover {
+    color: vars.$primary-dark;
+  }
 }
